@@ -21,20 +21,20 @@ export const assets = {
 };
 
 export const AiToolsData = [
-    {
-        title: 'AI Article Writer',
-        description: 'Generate high-quality, engaging articles on any topic with our AI writing technology.',
-        Icon: SquarePen,
-        bg: { from: '#3588F2', to: '#0BB0D7' },
-        path: '/ai/write-article'
-    },
-    {
-        title: 'Blog Title Generator',
-        description: 'Find the perfect, catchy title for your blog posts with our AI-powered generator.',
-        Icon: Hash,
-        bg: { from: '#B153EA', to: '#E549A3' },
-        path: '/ai/blog-titles'
-    },
+    // {
+    //     title: 'AI Article Writer',
+    //     description: 'Generate high-quality, engaging articles on any topic with our AI writing technology.',
+    //     Icon: SquarePen,
+    //     bg: { from: '#3588F2', to: '#0BB0D7' },
+    //     path: '/ai/write-article'
+    // },
+    // {
+    //     title: 'Blog Title Generator',
+    //     description: 'Find the perfect, catchy title for your blog posts with our AI-powered generator.',
+    //     Icon: Hash,
+    //     bg: { from: '#B153EA', to: '#E549A3' },
+    //     path: '/ai/blog-titles'
+    // },
     {
         title: 'AI Image Generation',
         description: 'Create stunning visuals with our AI image generation tool, Experience the power of AI ',
