@@ -19,7 +19,7 @@ export const generateArticle = async (req, res) => {
         const plan = req.plan;
         const free_usage = req.free_usage ;
 
-        if(plan === 'premium' && free_usage >= 10){
+        if(plan !== 'premium' && free_usage >= 100){
             return res.json({ success: false, message: 'You have reached your free usage limit for this month. Please upgrade to premium.' })
         }
 
@@ -52,6 +52,7 @@ export const generateArticle = async (req, res) => {
         res.json({ success : true, content})
 
     } catch (error) {
+        
         console.log(error.message)
         res.json({success : false, message: error.message})
 
@@ -59,6 +60,23 @@ export const generateArticle = async (req, res) => {
 
 }
 
+
+const callAIWithRetry = async (params, retries = 3) => {
+    for (let i = 0; i < retries; i++) {
+        try {
+            return await AI.chat.completions.create(params);
+        } catch (error) {
+            const is429 = error?.status === 429 || error?.response?.status === 429;
+            if (is429 && i < retries - 1) {
+                const delay = Math.pow(2, i) * 1000; // 1s, 2s, 4s
+                console.log(`Rate limited by Gemini. Retrying in ${delay}ms...`);
+                await new Promise(r => setTimeout(r, delay));
+            } else {
+                throw error;
+            }
+        }
+    }
+};
 export const generateBlogTitles = async (req, res) => {
     try{
         const {userId} = req.auth();
@@ -66,7 +84,7 @@ export const generateBlogTitles = async (req, res) => {
         const plan = req.plan;
         const free_usage = req.free_usage ;
 
-        if(plan === 'premium' && free_usage >= 10){
+        if(plan !== 'premium' && free_usage >= 100){
             return res.json({ success: false, message: 'You have reached your free usage limit for this month. Please upgrade to premium.' })
         }
 
@@ -99,6 +117,7 @@ export const generateBlogTitles = async (req, res) => {
         res.json({ success : true, content})
 
     } catch (error) {
+        console.log(error.response?.data || error.message || error)
         console.log(error.message)
         res.json({success : false, message: error.message})
 
