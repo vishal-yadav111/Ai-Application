@@ -131,9 +131,9 @@ export const generateImage = async (req, res) => {
         const{prompt, publish} = req.body;
         const plan = req.plan;
 
-        if(plan !== 'premium'){
-            return res.json({ success: false, message: 'This feature is only available for premium subscriptions only' })
-        }
+        // if(plan !== 'premium'){
+        //     return res.json({ success: false, message: 'This feature is only available for premium subscriptions only' })
+        // }
 
         const formData = new FormData();
         formData.append('prompt', prompt)
@@ -169,9 +169,9 @@ export const RemoveImageBackground = async (req, res) => {
         const image = req.file;
         const plan = req.plan;
 
-        if(plan !== 'premium'){
-            return res.json({ success: false, message: 'This feature is only available for premium subscriptions only' })
-        }
+        // if(plan !== 'premium'){
+        //     return res.json({ success: false, message: 'This feature is only available for premium subscriptions only' })
+        // }
 
         const {secure_url} = await cloudinary.uploader.upload(image.path, {
             transformation: [
@@ -205,9 +205,9 @@ export const RemoveImageObject = async (req, res) => {
         const image = req.file;
         const plan = req.plan;
 
-        if(plan !== 'premium'){
-            return res.json({ success: false, message: 'This feature is only available for premium subscriptions only' })
-        }
+        // if(plan !== 'premium'){
+        //     return res.json({ success: false, message: 'This feature is only available for premium subscriptions only' })
+        // }
 
         const {public_id} = await cloudinary.uploader.upload(image.path)
 
@@ -238,9 +238,9 @@ export const ResumeReview = async (req, res) => {
         const resume = req.file;
         const plan = req.plan;
 
-        if(plan !== 'premium'){
-            return res.json({ success: false, message: 'This feature is only available for premium subscriptions only' })
-        }
+        // if(plan !== 'premium'){
+        //     return res.json({ success: false, message: 'This feature is only available for premium subscriptions only' })
+        // }
 
         if(resume.size > 5 * 1024 * 1024){
             return res.json({success: false, message: 'Resume file size exceeds allowed size (5MB).'})
